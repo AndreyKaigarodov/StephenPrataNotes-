@@ -32,14 +32,38 @@
 б) Деструктор вызывается при выходе из области видимости или вызове для объекта функции delete
 
 7. Написать код конструктора для класса банковского счета, описанного в вопросе 5
-
+Решение: Файл  ХХХХХ
 8. Что такое конструктор по умолчанию? Каковы выгоды его приенения?
-Не имеет параметров, либо все параметры заданы по умолчанию
+- Не имеет параметров, либо все параметры заданы по умолчанию
 Позволяет: объявлять объект без инициализации, позволяет объявлять массивы. 
 
 9 Модифицируйте определение клаасса Stock так, чтобы он имел функции-члены, которые возвращают
 значения индивидуальных данных-членов. Член, который возвращает наименование компании, не должен давать возможность
 изменять массив. Т.е. он не может просто возвращать ссылку на string. Он может возвращать const-ссылку.
+Результат:
+class Stock
+{
+private:
+    std::string company;
+    int shares;
+    double share_val;
+    double total_val;
+    void set_tot() { total_val = shares * share_val; }
+public:
+  //  Stock();        // default constructor
+    Stock(const std::string & co, long n = 0, double pr = 0.0);
+    ~Stock();       // do-nothing destructor
+    void buy(long num, double price);
+    void sell(long num, double price);
+    void update(double price);
+    void show()const;
+    const Stock & topval(const Stock & s) const;
+    //UPD:
+    const string& getCompanyName() const {return company};
+    double getTotalVal() const {return total_val};
+    double getShareVal() const {return share_val};
+    int getShares const {return shares};
+};
 
 10. Что такое this и *this
 this - доступ к полям класса
