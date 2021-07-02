@@ -10,18 +10,23 @@ Bank::Bank(const char *name, long balance)
     strcpy(m_name, name);
     const char *rnd_num = getRandomAccountNum();
     strcpy(m_account_num, rnd_num);
+    delete[] rnd_num;
     m_balance = balance;
 }
 
 const char *Bank::getRandomAccountNum()
 {
-    char *ch_ptr = new char[17];
-    ch_ptr[17] = '\0';
-    for (char *tmp_ptr = ch_ptr; *tmp_ptr != '\0'; tmp_ptr++)
+    char *ch_ptr = new char;
+    //рил лень
+    strcpy(ch_ptr, "potom napishu");
+    /*
+    ch_ptr[0] = 'a';
+
+    for (int i = 0; i < 17; i++)
     {
-        int a = 10;
-        *tmp_ptr = (char)a;
+        ch_ptr[i] = (char)97;
     }
+    */
     return ch_ptr;
 }
 
@@ -49,9 +54,14 @@ void Bank::deposit(long cash)
 void Bank::withdraw(long cash)
 {
     std::cout << "Balance: " << m_balance << std::endl;
-    if (m_balance >= cash)
+    if (cash < 0)
+    {
+        std::cout << "error: bad value of cahs !" << std::endl;
+    }
+    else if (m_balance >= cash)
     {
         m_balance -= cash;
+
         std::cout << "Cash: " << cash << std::endl;
     }
     else
